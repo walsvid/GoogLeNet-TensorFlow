@@ -94,3 +94,11 @@ class InceptionV1(Net):
         inception_3b_output = self.concat('inception_3b_output', [inception_3b_1x1, inception_3b_3x3, inception_3b_5x5, inception_3b_pool_proj])
 
         pool3_3x3_s2 = self.max_pool('pool3_3x3_s2', inception_3b_output, 3, 2)
+        inception_4a_1x1 = self.conv2d('inception_4a_1x1', pool3_3x3_s2, 192, 1, 1)
+        inception_4a_3x3_reduce = self.conv2d('inception_4a_3x3_reduce', pool3_3x3_s2, 96, 1, 1)
+        inception_4a_3x3 = self.conv2d('inception_4a_3x3', inception_4a_3x3_reduce, 208, 3, 1)
+        inception_4a_5x5_reduce = self.conv2d('inception_4a_5x5_reduce', pool3_3x3_s2, 16, 1, 1)
+        inception_4a_5x5 = self.conv2d('inception_4a_5x5', inception_4a_5x5_reduce, 48, 5, 1)
+        inception_4a_pool = self.max_pool('inception_4a_pool', pool3_3x3_s2, 3, 1)
+        inception_4a_pool_proj = self.conv2d('inception_4a_pool_proj', inception_4a_pool, 64, 1, 1)
+        inception_4a_output = self.concat('inception_4a_output', [inception_4a_1x1, inception_4a_3x3, inception_4a_5x5, inception_4a_pool_proj])
