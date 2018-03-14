@@ -19,6 +19,9 @@ class InceptionV1(Net):
     def init_saver(self):
         pass
 
+    def get_summary(self):
+        return self.summary
+
     def conv2d(self, layer_name, inputs, out_channels, kernel_size, strides=1, padding='same'):
         in_channels = inputs.get_shape()[-1]
         with tf.variable_scope(layer_name):
