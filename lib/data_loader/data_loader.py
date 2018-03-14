@@ -23,3 +23,8 @@ class DataLoader(object):
 
     def generate_batch(self):
         pass
+
+
+class Flowers102DataLoader(DataLoader):
+    def __init__(self, config, is_train, is_shuffle):
+        super().__init__(config, is_train, is_shuffle)
