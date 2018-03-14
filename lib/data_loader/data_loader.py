@@ -77,6 +77,8 @@ class Flowers102DataLoader(DataLoader):
                                                       batch_size=self.batch_size,
                                                       num_threads=64,
                                                       capacity=20000)
-        # label_batch = tf.reshape(label_batch, [self.batch_size])
 
+        label_batch = tf.one_hot(label_batch, depth=self.n_classes)
+        label_batch = tf.cast(label_batch, dtype=tf.int32)
+        label_batch = tf.reshape(label_batch, [self.batch_size, self.n_classes])
         return image_batch, label_batch
