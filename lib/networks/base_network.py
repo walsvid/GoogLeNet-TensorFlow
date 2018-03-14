@@ -15,6 +15,7 @@ class Net:
         self.init_global_step()
         # init the epoch counter
         self.init_cur_epoch()
+        self.scope = {}
 
     # save function thet save the checkpoint in the path defined in configfile
     def save(self, sess):
@@ -55,7 +56,8 @@ class Net:
         for key in data_dict.keys():
             if key not in skip_layer:
                 # with tf.variable_scope(key, reuse=True, auxiliary_name_scope=False):
-                with tf.variable_scope(key, reuse=True):
-                    for subkey, data in data_dict[key].items():
-                        session.run(tf.get_variable(subkey).assign(data))
+                with tf.variable_scope(self.scope[key], reuse=True) as scope:
+                    with tf.name_scope(scope.original_name_scope):
+                        for subkey, data in data_dict[key].items():
+                            session.run(tf.get_variable(subkey).assign(data))
 

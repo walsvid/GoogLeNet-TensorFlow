@@ -24,7 +24,8 @@ class InceptionV1(Net):
 
     def conv2d(self, layer_name, inputs, out_channels, kernel_size, strides=1, padding='SAME'):
         in_channels = inputs.get_shape()[-1]
-        with tf.variable_scope(layer_name):
+        with tf.variable_scope(layer_name) as scope:
+            self.scope[layer_name] = scope
             w = tf.get_variable(name='weights',
                                 trainable=True,
                                 shape=[kernel_size, kernel_size, in_channels, out_channels],
@@ -79,7 +80,8 @@ class InceptionV1(Net):
             size = shape[1].value * shape[2].value * shape[3].value
         else:  # x has already flattened
             size = shape[-1].value
-        with tf.variable_scope(layer_name):
+        with tf.variable_scope(layer_name) as scope:
+            self.scope[layer_name] = scope
             w = tf.get_variable('weights',
                                 shape=[size, out_nodes],
                                 initializer=tf.contrib.layers.xavier_initializer())
@@ -101,7 +103,7 @@ class InceptionV1(Net):
 
     def cal_accuracy(self, logits, labels):
         with tf.name_scope('accuracy') as scope:
-            correct = tf.equal(tf.arg_max(logits, 1), tf.arg_max(labels, 1))
+            correct = tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1))
             correct = tf.cast(correct, tf.float32)
             self.accuracy = tf.reduce_mean(correct) * 100.0
             accuracy_summary = tf.summary.scalar(scope, self.accuracy)
