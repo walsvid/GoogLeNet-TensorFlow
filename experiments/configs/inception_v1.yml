@@ -1,8 +1,8 @@
 TRAIN:
   CHECKPOINT_DIR: './logs/train/'
   MAX_TO_KEEP: 1000
-  LEARNING_RATE: 0.01
-  MAX_STEP: 30000
+  LEARNING_RATE: 0.001
+  MAX_STEP: 15000
   IS_PRETRAIN: True
   PRE_TRAIN_WEIGHT: './data/imagenet_models/googlenet.npy'
 
@@ -10,7 +10,7 @@ TEST:
 
 DATA:
   N_CLASSES: 102
-  BATCH_SIZE: 10
+  BATCH_SIZE: 32
   DATASET_TYPE: 'BIN'
   IMAGE_SIZE:
     WIDTH: 224
