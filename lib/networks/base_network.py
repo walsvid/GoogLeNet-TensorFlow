@@ -21,7 +21,7 @@ class Net:
         self.saver.save(sess, self.config.checkpoint_dir, self.global_step_tensor)
         print("Model saved")
 
-    # load latest checkpoint from the experiment path defined in config_file
+    # load latest checkpoint from the experiments path defined in config_file
     def load(self, sess):
         latest_checkpoint = tf.train.latest_checkpoint(self.config.checkpoint_dir)
         if latest_checkpoint:
