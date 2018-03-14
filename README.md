@@ -55,5 +55,15 @@ Recommend using python virtual environment to train.
 > Nilsback, M-E. and Zisserman, A.
 > Automated flower classification over a large number of classes
 
+### Images
+#### example of data
+|![](http://ww1.sinaimg.cn/thumbnail/006rfyOZgy1fpcpn6to9ij30ii0dwq54.jpg)|![](http://ww1.sinaimg.cn/thumbnail/006rfyOZgy1fpcpn6usntj30ij0dwgnp.jpg)|![](http://ww1.sinaimg.cn/thumbnail/006rfyOZgy1fpcppf8u16j30ku0dwq4y.jpg)|
+|---|---|---|
+#### loss and accuracy
+![](http://ww1.sinaimg.cn/mw690/006rfyOZgy1fpcp7bei91j313k0f2775.jpg)
+#### graph
+Please note that the current Tensorboard shows Graph has been beautified, but it is implemented in other ways. Because of the lower version of TensorFlow, using variable_scope when loading pre-trained weights will result in duplicate variable_scope being created. If you need to beautify Graph, please select a version of `tensorflow >=1.5.0` and use `uxiliary_name_scope=False`
+
+![](http://ww1.sinaimg.cn/mw690/006rfyOZgy1fpcp7f9av7j316n3zh4qp.jpg)
 ### Release
 v0.1.0
