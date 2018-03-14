@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 from lib.utils.config import Config, TrainNetConfig
 
 
@@ -14,6 +15,7 @@ class Net:
         self.init_global_step()
         # init the epoch counter
         self.init_cur_epoch()
+        self.scope = {}
 
     # save function thet save the checkpoint in the path defined in configfile
     def save(self, sess):
@@ -21,7 +23,7 @@ class Net:
         self.saver.save(sess, self.config.checkpoint_dir, self.global_step_tensor)
         print("Model saved")
 
-    # load latest checkpoint from the experiment path defined in config_file
+    # load latest checkpoint from the experiments path defined in config_file
     def load(self, sess):
         latest_checkpoint = tf.train.latest_checkpoint(self.config.checkpoint_dir)
         if latest_checkpoint:
@@ -48,3 +50,14 @@ class Net:
 
     def build_model(self):
         raise NotImplementedError
+
+    def load_with_skip(self, data_path, session, skip_layer):
+        data_dict = np.load(data_path, encoding='latin1').item()  # type: dict
+        for key in data_dict.keys():
+            if key not in skip_layer:
+                # with tf.variable_scope(key, reuse=True, auxiliary_name_scope=False):
+                with tf.variable_scope(self.scope[key], reuse=True) as scope:
+                    with tf.name_scope(scope.original_name_scope):
+                        for subkey, data in data_dict[key].items():
+                            session.run(tf.get_variable(subkey).assign(data))
+
