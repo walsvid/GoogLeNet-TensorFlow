@@ -6,7 +6,7 @@ from lib.utils.config import Config, TrainNetConfig
 class Net:
     def __init__(self, cfg_):
         """
-        :type cfg_: TrainNetConfig
+        :type cfg_: Config
         :param cfg_:
         """
         self.config = cfg_
