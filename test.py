@@ -8,13 +8,13 @@ from lib.googlenet.inception_v1 import InceptionV1
 def parse_args():
     """Parse input arguments."""
     parser = argparse.ArgumentParser(description='VGG test demo')
-    parser.add_argument('--net', dest='demo_net', help='Network to use [vgg16]',
-                        default='VGGnet_test')
+    parser.add_argument('--net', dest='demo_net', help='Network to use [googlenet incption v1]',
+                        default='InceptionV1')
     parser.add_argument('--im', dest='im_path', help='Path to the image',
                         default='data/demo/demo.jpg', type=str)
     parser.add_argument('--model', dest='model', help='Model path', default='./')
     parser.add_argument('--meta', dest='meta', help='Dataset meta info, class names',
-                        default='./data/datasets/cifar-10-batches-bin/batches.meta.txt', type=str)
+                        default='./data/datasets/meta.txt', type=str)
     args = parser.parse_args()
 
     return args
@@ -35,7 +35,7 @@ def test_net():
 
     net = InceptionV1(test_config)
     logits = net.build_model()
-    # values, indices = net.cal_result(logits)
+    values, indices = net.cal_result(logits)
 
     ckpt_path = test_config.model_path
     # start a session
