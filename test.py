@@ -3,6 +3,7 @@ import tensorflow as tf
 from scipy.misc import imread, imresize
 from lib.utils.config import ConfigReader, TestNetConfig
 from lib.googlenet.inception_v1 import InceptionV1
+from lib.googlenet.inception_v2 import InceptionV2
 
 
 def parse_args():
