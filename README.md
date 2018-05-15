@@ -66,4 +66,4 @@ Please note that the current Tensorboard shows Graph has been beautified, but it
 
 ![](http://ww1.sinaimg.cn/mw690/006rfyOZgy1fpcp7f9av7j316n3zh4qp.jpg)
 ### Release
-v0.1.0
+v0.1.1
