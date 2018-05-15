@@ -33,6 +33,11 @@ class TrainNetConfig(Config):
 class TestNetConfig(Config):
     def __init__(self, cfg_):
         super().__init__(cfg_)
+        self.model_path = self.config['MODEL_PATH']
+        self.image_width = self.config['IMAGE_SIZE']['WIDTH']
+        self.image_height = self.config['IMAGE_SIZE']['HEIGHT']
+        self.image_depth = self.config['IMAGE_SIZE']['DEPTH']
+        self.n_classes = self.config['N_CLASSES']
 
 
 class DataConfig(Config):
